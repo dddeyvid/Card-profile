@@ -1,10 +1,24 @@
-import Card from "./Card"
+import Card from "./components/Card"
 import eueu from "./assets/fotoeu.jpeg"
+import { useEffect } from "react"
 
 
 export default function App() {
+  
+  async function getInfoGit(userName){
+    //fazer request
+    const gitHubInfo = await fetch("https://api.github.com/users/dddeyvid")
+    console.log(gitHubInfo)
+    //colocar useState se der certo
+    //se der merda falar q deu merda
+  }
+
+  useEffect(()=> {
+    getInfoGit("dddeyvid")
+  },[])
+  
   return (
-    <div>
+    
       <Card
         imgProfile={eueu}
         name = "Deyvid Rocha"
@@ -15,6 +29,6 @@ export default function App() {
         linkd = "https://www.linkedin.com/in/deyvid-rocha/"
         tt = "https://twitter.com/home"
       />
-    </div>
+    
   )
 }

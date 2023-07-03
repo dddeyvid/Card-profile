@@ -1,6 +1,13 @@
-import styles from "./styles/styles.module.css"
+import styles from "../styles/styles.module.css"
+import Button from "./Button"
 
 export default function Card({imgProfile, name, bio, tel, email, git, linkd, tt}) {
+  
+  function openLink(linkUrl){
+    window.open(linkUrl, "_blank");
+    
+  }
+  
   return (
     <>
     <div className={styles.container}>
@@ -23,26 +30,10 @@ export default function Card({imgProfile, name, bio, tel, email, git, linkd, tt}
       
       <hr className={styles.hrLeft} />
 
-      <button className={styles.button}>
-  <a href={git} target="_blank" rel="noopener noreferrer">
-    GitHub
-  </a>
-</button>
+      <Button action={() => openLink(git)} text={"GitHub"} />
+      <Button action={() => openLink(linkd)} text={"Linkedin"} />
+      <Button action={() => openLink(tt)} text={"Twitter"} />
 
-<button className={styles.button}>
-  <a href={linkd} target="_blank" rel="noopener noreferrer">
-    LinkedIn
-  </a>
-</button>
-
-<button className={styles.button}>
-  <a href={tt} target="_blank" rel="noopener noreferrer">
-    Twitter
-  </a>
-</button>
-
-
-      
     </div>
   </>
   )
