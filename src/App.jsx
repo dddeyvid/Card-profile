@@ -1,10 +1,13 @@
 import Card from "./components/Card"
 import eueu from "./assets/fotoeu.jpeg"
 import { useEffect } from "react"
+import Serch from "./components/Serch"
 
 
 export default function App() {
   
+  
+
   async function getInfoGit(userName){
     //fazer request
     const gitHubInfo = await fetch("https://api.github.com/users/dddeyvid")
@@ -18,7 +21,9 @@ export default function App() {
   },[])
   
   return (
-    
+    <>
+      <Serch />
+
       <Card
         imgProfile={eueu}
         name = "Deyvid Rocha"
@@ -28,7 +33,7 @@ export default function App() {
         git = "https://github.com/dddeyvid"
         linkd = "https://www.linkedin.com/in/deyvid-rocha/"
         tt = "https://twitter.com/home"
-      />
-    
+      /> 
+    </>
   )
 }
