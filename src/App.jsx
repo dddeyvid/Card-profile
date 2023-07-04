@@ -1,39 +1,41 @@
 import Card from "./components/Card"
 import eueu from "./assets/fotoeu.jpeg"
-import { useEffect } from "react"
-import Serch from "./components/Serch"
-
+import { useEffect, useState } from "react"
+import Search from "./components/Serch"
+import axios from 'axios'
 
 export default function App() {
   
-  
+  const [showCard, setShowCard] = useState(false) //controle da exibição do card
+  const [profile, setProfile] = useState('')
 
   async function getInfoGit(userName){
     //fazer request
-    const gitHubInfo = await fetch("https://api.github.com/users/dddeyvid")
-    console.log(gitHubInfo)
-    //colocar useState se der certo
-    //se der merda falar q deu merda
+
+    try{
+      const response = await axios.get(`https://api.github.com/users/${userName}`)
+      const gitHubInfo = response.data
+      setShowCard(true)
+    } catch (error) {
+      alert('Deu pau na maquina, tente de novo!', error)
+    }
   }
 
-  useEffect(()=> {
-    getInfoGit("dddeyvid")
-  },[])
-  
   return (
     <>
-      <Serch />
-
-      <Card
-        imgProfile={eueu}
-        name = "Deyvid Rocha"
-        bio = "Estudante de React"
-        tel = "(19) 99138-1152"
-        email = "davi_rocha@live.com"
-        git = "https://github.com/dddeyvid"
-        linkd = "https://www.linkedin.com/in/deyvid-rocha/"
-        tt = "https://twitter.com/home"
-      /> 
+      <Search onSearch={getInfoGit} profile={profile} setProfile={setProfile}/>
+      {showCard && (
+        <Card
+          imgProfile={eueu}
+          name = {gitHubInfo}
+          bio = "Estudante de React"
+          tel = "(19) 99138-1152"
+          email = "davi_rocha@live.com"
+          git = "https://github.com/dddeyvid"
+          linkd = "https://www.linkedin.com/in/deyvid-rocha/"
+          tt = "https://twitter.com/home"
+        />
+      )}
     </>
   )
 }
